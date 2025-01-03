@@ -35,7 +35,7 @@ int main(void)
                 drawBoard();  
                 break; 
             case 'a':
-
+                leftPress(); 
                 drawBoard(); 
                 break; 
             //logic for downpress
@@ -44,7 +44,7 @@ int main(void)
                 drawBoard(); 
                 break; 
             case 'd':
-
+                rightPress(); 
                 drawBoard();
                 break; 
             default:
@@ -116,6 +116,36 @@ void upPress(){
                     gameMat[i+2][j] = 0;
                 }else{
                     gameMat[i+2][j] = 0;
+                }
+            }
+        }
+    }
+}
+void leftPress(){
+    for(int j=0; j<3; j++){
+        for(int i=0; i<3; i++){
+            if(gameMat[i][j] == gameMat[i][j+1] && gameMat[i][j] != 0){
+                gameMat[i][j] *= 2; 
+                if(i==0){
+                    gameMat[i][j+1] = gameMat[i][j+2]; 
+                    gameMat[i][j+2] = 0;
+                }else{
+                    gameMat[i][j+2] = 0;
+                }
+            }
+        }
+    }
+}
+void rightPress(){
+    for(int j=2; j>0; j--){
+        for(int i=0; i<3; i++){
+            if(gameMat[i][j] == gameMat[i][j-1] && gameMat[i][j] != 0){
+                gameMat[i][j] *= 2; 
+                if(i==0){
+                    gameMat[i][j-1] = gameMat[i][j-2]; 
+                    gameMat[i][j-2] = 0;
+                }else{
+                    gameMat[i][j-2] = 0;
                 }
             }
         }
