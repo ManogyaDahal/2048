@@ -5,12 +5,17 @@
 // Global variables 
 int gameMat[3][3];
 
-//functions 
+//Game functions 
 void init(); //Initialize the game 
 void drawBoard(); //drawing board (And yes board is hardcoded)
 int gameWin(); //game Win condition 
 int randomGen(); //To generate 2 in random empty blocks
+
+//game movements
 void downPress(); 
+void rightPress(); 
+void leftPress(); 
+void upPress(); 
 
 
 int main(void)
@@ -20,25 +25,31 @@ int main(void)
     init(); 
     drawBoard(); 
     //game loop 
-    
+
     while(true){
         printf("Enter w , a , s ,d: \n"); 
         scanf(" %c",&ch);
         switch (ch) {
             case 'w':
-                
-            break; 
+                upPress(); 
+                drawBoard();  
+                break; 
             case 'a':
-                
-            break; 
+
+                drawBoard(); 
+                break; 
             //logic for downpress
             case 's':
                 downPress();
                 drawBoard(); 
-            break; 
+                break; 
             case 'd':
-                
-            break; 
+
+                drawBoard();
+                break; 
+            default:
+                printf("Wrong key Press %c \n press w a s d only!!",ch); 
+                drawBoard(); 
         }
 
         if(gameWin()){
@@ -59,14 +70,14 @@ void init(){
 }
 
 void drawBoard(){
-        printf("Initializing the board.. \n"); 
-        printf("-------------\n"); 
-        printf("| %d | %d | %d |\n",gameMat[0][0], gameMat[0][1], gameMat[0][2]);
-        printf("-------------\n"); 
-        printf("| %d | %d | %d |\n",gameMat[1][0], gameMat[1][1], gameMat[1][2]);
-        printf("------------\n"); 
-        printf("| %d | %d | %d |\n",gameMat[2][0], gameMat[2][1], gameMat[2][2]);
-        printf("-------------\n"); 
+    printf("Initializing the board.. \n"); 
+    printf("-------------\n"); 
+    printf("| %d | %d | %d |\n",gameMat[0][0], gameMat[0][1], gameMat[0][2]);
+    printf("-------------\n"); 
+    printf("| %d | %d | %d |\n",gameMat[1][0], gameMat[1][1], gameMat[1][2]);
+    printf("------------\n"); 
+    printf("| %d | %d | %d |\n",gameMat[2][0], gameMat[2][1], gameMat[2][2]);
+    printf("-------------\n"); 
 }
 int gameWin(){
 
@@ -81,17 +92,32 @@ int gameWin(){
 }
 
 void downPress(){
-              for(int i=2; i>0; i--){
-                    for(int j=0; j<3; j++){
-                       if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
-                            gameMat[i][j] *= 2; 
-                    if(i==2){
-                            gameMat[i-1][j] = gameMat[i-2][j]; 
-                            gameMat[i-2][j] = 0;
-                            }else{
-                            gameMat[i-1][j] = 0;
-                            }
-                        }
-                    }
+    for(int i=2; i>0; i--){
+        for(int j=0; j<3; j++){
+            if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
+                gameMat[i][j] *= 2; 
+                if(i==2){
+                    gameMat[i-1][j] = gameMat[i-2][j]; 
+                    gameMat[i-2][j] = 0;
+                }else{
+                    gameMat[i-1][j] = 0;
                 }
+            }
+        }
+    }
+}
+void upPress(){
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(gameMat[i][j] == gameMat[i+1][j] && gameMat[i][j] != 0){
+                gameMat[i][j] *= 2; 
+                if(i==0){
+                    gameMat[i+1][j] = gameMat[i+2][j]; 
+                    gameMat[i+2][j] = 0;
+                }else{
+                    gameMat[i+2][j] = 0;
+                }
+            }
+        }
+    }
 }
