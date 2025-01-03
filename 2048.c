@@ -195,6 +195,24 @@ void leftPress(){
     }
 }
 void rightPress(){
+    //logic for shifting
+    for(int j=0; j<1; j++){ //it is enough to run the loop once
+        for(int i=0; i<3; i++){
+            if( j==0 && gameMat[i][j+2]==0 && gameMat[i][j+1] != 0){
+                gameMat[i][j+2] = gameMat[i][j+1]; 
+                gameMat[i][j+1] = gameMat[i][j]; 
+                gameMat[i][j] = 0; 
+                if(gameMat[i][j+2]==0){
+                    gameMat[i][j+2] = gameMat[i][j+1];
+                    gameMat[i][j+1]=0;
+                }
+            }
+            if(gameMat[i][j+1]==0 && gameMat[i][j] != 0){
+                gameMat[i][j+1] = gameMat[i][j];
+                gameMat[i][j] = 0; 
+            }
+        }
+    }
     //logic for combining
     for(int j=2; j>0; j--){
         for(int i=0; i<3; i++){
