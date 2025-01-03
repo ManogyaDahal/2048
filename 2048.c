@@ -96,15 +96,17 @@ void downPress(){
     //logic for shifthing 2 numbers
     for(int i=0; i<1; i++){
         for(int j=0; j<3; j++){
-            if( i==0 && gameMat[i+2][j]==0 ){
+            //case 1 
+            if( gameMat[i+2][j] == 0 ){
                 gameMat[i+2][j] = gameMat[i+1][j]; 
                 gameMat[i+1][j] = gameMat[i][j]; 
                 gameMat[i][j] = 0; 
-                if(gameMat[i+2][j]==0){
+                if(gameMat[i+2][j] == 0){
                     gameMat[i+2][j] = gameMat[i+1][j];
-                    gameMat[i+1][j]=0; 
+                    gameMat[i+1][j] = 0; 
                 }
             }
+            //case 2
             if(gameMat[i+1][j]==0 && gameMat[i][j] != 0){
                 gameMat[i+1][j] = gameMat[i][j];
                 gameMat[i][j] = 0; 
@@ -112,16 +114,23 @@ void downPress(){
         }
     }
     //logic for combining 2 numbers 
-    for(int i=2; i>0; i--){
+    for(int i=2; i<3; i++){
         for(int j=0; j<3; j++){
-            if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
-                gameMat[i][j] *= 2; 
-                if(i==2){
-                    gameMat[i-1][j] = gameMat[i-2][j]; 
-                    gameMat[i-2][j] = 0;
-                }else{
-                    gameMat[i-1][j] = 0;
-                }
+           //case 1 
+            if(gameMat[i][j] == gameMat[i-1][j]){
+                gameMat[i][j] = gameMat[i-1][j] * 2; 
+                gameMat[i-1][j] = gameMat[i-2][j]; 
+                gameMat[i-2][j] = 0; 
+            }
+            //case 2 
+            if(gameMat[i-1] == gameMat[i-2]){
+                gameMat[i-1][j] = gameMat[i-2][j]; 
+                gameMat[i-2][j] = 0; 
+            }
+            //case 3 
+            if(gameMat[i][j] == gameMat[i-2][j] && gameMat[i-1][j] == 0){
+                gameMat[i][j] = 2* gameMat[i][j];
+                gameMat[i-2][j] = 0; 
             }
         }
     }
