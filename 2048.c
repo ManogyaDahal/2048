@@ -92,6 +92,25 @@ int gameWin(){
 }
 
 void downPress(){
+
+    //logic for shifthing 2 numbers
+    for(int i=0; i<1; i++){
+        for(int j=0; j<3; j++){
+            if( i==0 && gameMat[i+2][j]==0 && gameMat[i+1][j]!= 0){
+                gameMat[i+2][j] = gameMat[i+1][j]; 
+                gameMat[i+1][j] = gameMat[i][j]; 
+                gameMat[i][j] = 0; 
+                if(gameMat[i+2][j]==0){
+                    gameMat[i+1][j] = gameMat[i+2][j];
+                }
+            }
+            if(gameMat[i+1][j]==0 && gameMat[i][j] != 0){
+                gameMat[i+1][j] = gameMat[i][j];
+                gameMat[i][j] = 0; 
+            }
+        }
+    }
+    //logic for combining 2 numbers 
     for(int i=2; i>0; i--){
         for(int j=0; j<3; j++){
             if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
