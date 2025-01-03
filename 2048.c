@@ -10,6 +10,7 @@ void init(); //Initialize the game
 void drawBoard(); //drawing board (And yes board is hardcoded)
 int gameWin(); //game Win condition 
 int randomGen(); //To generate 2 in random empty blocks
+void downPress(); 
 
 
 int main(void)
@@ -21,6 +22,8 @@ int main(void)
     //game loop 
     
     while(true){
+        printf("Enter w , a , s ,d: \n"); 
+        scanf(" %c",&ch);
         switch (ch) {
             case 'w':
                 
@@ -30,18 +33,8 @@ int main(void)
             break; 
             //logic for downpress
             case 's':
-              for(int i=2; i<0; i--){
-                    for(int j=0; j<3; j++){
-                       if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
-                            gameMat[i][j] *= 2; 
-                            if(i==2){
-                            gameMat[i-1][j] = gameMat[i-2][j]; 
-                            }else{
-                            gameMat[i-1][j] = 0;
-                            }
-                        }
-                    }
-                }
+                downPress();
+                drawBoard(); 
             break; 
             case 'd':
                 
@@ -60,7 +53,7 @@ void init(){
     printf("Initializing the game.....\n"); 
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
-            gameMat[i][j] = 0;  
+            gameMat[i][j] = 2;  
         }
     }
 }
@@ -85,4 +78,20 @@ int gameWin(){
         }
     }
     return 0; 
+}
+
+void downPress(){
+              for(int i=2; i>0; i--){
+                    for(int j=0; j<3; j++){
+                       if(gameMat[i][j] == gameMat[i-1][j] && gameMat[i][j] != 0){
+                            gameMat[i][j] *= 2; 
+                    if(i==2){
+                            gameMat[i-1][j] = gameMat[i-2][j]; 
+                            gameMat[i-2][j] = 0;
+                            }else{
+                            gameMat[i-1][j] = 0;
+                            }
+                        }
+                    }
+                }
 }
