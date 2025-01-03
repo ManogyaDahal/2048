@@ -9,14 +9,14 @@ int gameMat[3][3];
 void init(); //Initialize the game 
 void drawBoard(); //drawing board (And yes board is hardcoded)
 int gameWin(); //game Win condition 
-int randomGen(); //To generate 2 in random empty blocks
+void randomGen(); //To generate 2 in random empty blocks
+void gameover(); 
 
 //game movements
 void downPress(); 
 void rightPress(); 
 void leftPress(); 
 void upPress(); 
-
 
 int main(void)
 {
@@ -51,7 +51,6 @@ int main(void)
                 printf("Wrong key Press %c \n press w a s d only!!",ch); 
                 drawBoard(); 
         }
-
         if(gameWin()){
             break; 
         }
@@ -64,12 +63,13 @@ void init(){
     printf("Initializing the game.....\n"); 
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
-            gameMat[i][j] = 2;  
+            gameMat[i][j] = 0;  
         }
     }
 }
 
 void drawBoard(){
+    randomGen();
     printf("Initializing the board.. \n"); 
     printf("-------------\n"); 
     printf("| %d | %d | %d |\n",gameMat[0][0], gameMat[0][1], gameMat[0][2]);
@@ -97,7 +97,7 @@ void downPress(){
     for(int i=0; i<1; i++){
         for(int j=0; j<3; j++){
             //case 1 
-            if( gameMat[i+2][j] == 0 ){
+            if( gameMat[i+2][j] == 0  ){
                 gameMat[i+2][j] = gameMat[i+1][j]; 
                 gameMat[i+1][j] = gameMat[i][j]; 
                 gameMat[i][j] = 0; 
@@ -263,4 +263,19 @@ void rightPress(){
             }
         }
     }
+}
+void randomGen(){
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(gameMat[i][j] == 0 ){
+                gameMat[i][j] = 2; 
+                return; 
+            }
+        }
+    }
+}
+
+void gameover(){
+    printf("Game over!! \n better luck next time\n"); 
+    exit(0); 
 }
