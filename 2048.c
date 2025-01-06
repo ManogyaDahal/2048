@@ -53,6 +53,7 @@ int main(void) {
     if (gameWin()) {
       break;
     }
+    gameover(); 
   }
   return EXIT_SUCCESS;
 }
@@ -275,6 +276,30 @@ void randomGen() {
 }
 
 void gameover() {
-  printf("Game over!! \n better luck next time\n");
+  // Check for empty cells
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (gameMat[i][j] == 0) {
+        return; // Game is not over, as there's an empty cell
+      }
+    }
+  }
+
+  // Check for possible merges horizontally and vertically
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      // Check horizontally
+      if (j < 2 && gameMat[i][j] == gameMat[i][j + 1]) {
+        return; // Game is not over, as a horizontal merge is possible
+      }
+      // Check vertically
+      if (i < 2 && gameMat[i][j] == gameMat[i + 1][j]) {
+        return; // Game is not over, as a vertical merge is possible
+      }
+    }
+  }
+
+  // If no empty cells or valid merges exist, game is over
+  printf("Game over!! \nBetter luck next time\n");
   exit(0);
 }
