@@ -11,6 +11,7 @@ void drawBoard(); // drawing board (And yes board is hardcoded)
 int gameWin();    // game Win condition
 void randomGen(); // To generate 2 in random empty blocks
 void gameover();
+void gameIntro(); 
 
 // game movements
 void downPress();
@@ -20,13 +21,12 @@ void upPress();
 
 int main(void) {
   char ch; // character for inputing the values for the game
-
+ gameIntro();
   init();
   drawBoard();
   // game loop
 
   while (true) {
-    printf("Enter w , a , s ,d: \n");
     scanf(" %c", &ch);
     switch (ch) {
       case 'w':
@@ -47,7 +47,7 @@ int main(void) {
         drawBoard();
         break;
       default:
-        printf("Wrong key Press %c \n press w a s d only!!", ch);
+        printf("\n\nWrong key Press %c \n press (w , a , s , d)  only!!", ch);
         drawBoard();
     }
     if (gameWin()) {
@@ -68,6 +68,20 @@ void init() {
   }
 }
 
+void gameIntro(){
+  printf("!!---------HELLO-------------!!\n"); 
+  printf("Hello and welcome to the game\n"); 
+  printf("--CONTROLS--\n\n"); 
+  printf(" s (down)\n w (up)\n d (left) \n a(right)\n\n"); 
+  printf("Enter 'y' to start the game: "); 
+  char ch; 
+  scanf("%c", &ch); 
+  if(ch != 'y'){
+    printf("Exiting the game for not pressing y\n"); 
+    exit(0); 
+  }
+  
+}
 void drawBoard() {
   system("clear"); 
   randomGen();
