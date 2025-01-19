@@ -6,10 +6,10 @@
 int gameMat[3][3];
 
 // Game functions
-void init();      // Initialize the game
-void drawBoard(); // drawing board (And yes board is hardcoded)
-int gameWin();    // game Win condition
-void randomGen(); // To generate 2 in random empty blocks
+void init();      
+void drawBoard(); 
+int gameWin();    
+void randomGen(); 
 void gameover();
 void gameIntro(); 
 
@@ -20,11 +20,10 @@ void leftPress();
 void upPress();
 
 int main(void) {
-  char ch; // character for inputing the values for the game
+  char ch; 
  gameIntro();
   init();
   drawBoard();
-  // game loop
 
   while (true) {
     scanf(" %c", &ch);
@@ -37,7 +36,6 @@ int main(void) {
         leftPress();
         drawBoard();
         break;
-      // logic for downpress
       case 's':
         downPress();
         drawBoard();
@@ -280,40 +278,34 @@ void rightPress() {
 }
 void randomGen() {
   int randomRow, randomCol;
-  for (int i = 0; i < 9; i++) { //there are only 9 possibilities 
+  for (int i = 0; i < 9; i++) { 
     do{
-      randomRow = rand() % 3; //generates from integer 0-2
+      randomRow = rand() % 3; 
       randomCol = rand() % 3; 
-    }while(gameMat[randomRow][randomCol] !=0 ); //when a row with 0 and 1 is found
+    }while(gameMat[randomRow][randomCol] !=0 ); 
   }
   gameMat[randomRow][randomCol] = (rand() % 2 == 0) ? 2 : 4;
 }
 
 void gameover() {
-  // Check for empty cells
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       if (gameMat[i][j] == 0) {
-        return; // Game is not over, as there's an empty cell
-      }
+        return;       }
     }
   }
 
-  // Check for possible merges horizontally and vertically
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      // Check horizontally
       if (j < 2 && gameMat[i][j] == gameMat[i][j + 1]) {
-        return; // Game is not over, as a horizontal merge is possible
+        return; 
       }
-      // Check vertically
       if (i < 2 && gameMat[i][j] == gameMat[i + 1][j]) {
-        return; // Game is not over, as a vertical merge is possible
+        return; 
       }
     }
   }
 
-  // If no empty cells or valid merges exist, game is over
   printf("Game over!! \nBetter luck next time\n");
   exit(0);
 }
